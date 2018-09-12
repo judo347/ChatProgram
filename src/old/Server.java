@@ -1,4 +1,4 @@
-package dk.old;
+package old;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,39 +8,32 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /** https://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html
- *  https://docs.oracle.com/javase/tutorial/networking/sockets/readingWriting.html */
+ *  https://docs.oracle.com/javase/tutorial/networking/sockets/readingWriting.html
+ *  https://tools.ietf.org/html/rfc862 - EchoProtocol*/
 
 public class Server {
 
     private static final int PORT_NUMBER = 4444;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         try (
                 ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
                 Socket clientSocket = serverSocket.accept();
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         ) {
+            System.out.println("The server is now running!");
+            System.out.println("Port: " + PORT_NUMBER + " Hostname: ");
 
-            String inputLine, outputLine;
-
-            // Initiate conversation with client
-            KnockKnockProtocol kkp = new KnockKnockProtocol();
-            outputLine = kkp.processInput(null);
-            out.println(outputLine);
-
+            String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                outputLine = kkp.processInput(inputLine);
-                out.println(outputLine);
-                if (outputLine.equals("Bye."))
-                    break;
+                out.println(inputLine);
             }
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                     + PORT_NUMBER + " or listening for a connection");
             System.out.println(e.getMessage());
         }
-
     }
 }

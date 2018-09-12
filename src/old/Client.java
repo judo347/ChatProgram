@@ -1,4 +1,4 @@
-package dk.old;
+package old;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,41 +10,27 @@ import java.net.UnknownHostException;
 public class Client {
 
     private static final int PORT_NUMBER = 4444;
+    private static final String HOST_NAME = "127.0.0.1";
 
-    public static void main(String[] args) {
-
-        String hostName = "mikkel";
-        int portNumber = PORT_NUMBER;
+    public static void main(String[] args) throws IOException {
 
         try (
-                Socket thisSocket = new Socket(hostName, portNumber);
-                PrintWriter out = new PrintWriter(thisSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(thisSocket.getInputStream()));
+                Socket echoSocket = new Socket(HOST_NAME, PORT_NUMBER);
+                PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+                BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
         ) {
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-            String fromServer;
-            String fromUser;
-
-            while ((fromServer = in.readLine()) != null) {
-                System.out.println("dk.old.Server: " + fromServer);
-
-                if (fromServer.equals("Bye.")) //dk.old.Client closes if this is met
-                    break;
-
-                fromUser = stdIn.readLine();
-                if (fromUser != null) {
-                    System.out.println("dk.old.Client: " + fromUser);
-                    out.println(fromUser);
-                }
+            String userInput;
+            while ((userInput = stdIn.readLine()) != null) {
+                out.println(userInput);
+                System.out.println("echo: " + in.readLine());
             }
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
+            System.err.println("Don't know about host " + HOST_NAME);
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                    hostName);
+            System.err.println("Couldn't get I/O for the connection to " + HOST_NAME);
             System.exit(1);
         }
-
     }
 }
