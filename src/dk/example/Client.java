@@ -1,4 +1,4 @@
-package old;
+package dk.example;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class Client {
     private static final int PORT_NUMBER = 4444;
     private static final String HOST_NAME = "127.0.0.1";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         try (
                 Socket echoSocket = new Socket(HOST_NAME, PORT_NUMBER);
@@ -26,7 +26,7 @@ public class Client {
                 System.out.println("echo: " + in.readLine());
             }
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + HOST_NAME);
+            System.err.println("Don't know about host " + HOST_NAME + HOST_NAME);
             System.exit(1);
         } catch (IOException e) {
             System.err.println("Couldn't get I/O for the connection to " + HOST_NAME);

@@ -1,4 +1,4 @@
-package old;
+package dk.example;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class Server {
 
     private static final int PORT_NUMBER = 4444;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         try (
                 ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
