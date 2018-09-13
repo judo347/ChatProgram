@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 public class MainClient extends Application {
 
+    private MyClient client;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -16,7 +18,7 @@ public class MainClient extends Application {
     public void start(Stage primaryStage) {
 
         try{
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/LoginScene.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/ChatScene.fxml"));
 
             primaryStage.setTitle("ChatProgram");
             primaryStage.setScene(new Scene(root));
@@ -26,5 +28,9 @@ public class MainClient extends Application {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        client = new MyClient();
     }
+
+
 }
