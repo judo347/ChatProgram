@@ -13,12 +13,12 @@ public class MainClient extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         try{
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("baseJavaFX/PrimaryScene.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/LoginScene.fxml"));
 
-            primaryStage.setTitle("PoE: Chaos Recipe Counter");
+            primaryStage.setTitle("ChatProgram");
             primaryStage.setScene(new Scene(root));
             primaryStage.setResizable(false);
             primaryStage.show();
