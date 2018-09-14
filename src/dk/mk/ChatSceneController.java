@@ -25,6 +25,9 @@ public class ChatSceneController implements Initializable {
     @FXML
     private TextField receivedField;
 
+    //TODO Make this class reference work
+    private MyClient myClient;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         assert buttonSend != null : "fx:id=\"buttonSend\" was not injected: check your FXML file 'ChatScene.fxml'.";

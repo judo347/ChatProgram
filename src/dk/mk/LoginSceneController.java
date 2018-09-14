@@ -27,6 +27,9 @@ public class LoginSceneController implements Initializable {
     @FXML
     private TextField textFieldUsername;
 
+    //TODO Make this class reference work
+    private MyClient myClient;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         assert buttonLogin != null : "fx:id=\"buttonLogin\" was not injected: check your FXML file 'LoginScene.fxml'.";
@@ -40,13 +43,13 @@ public class LoginSceneController implements Initializable {
 
         //TODO Send username to server?
 
-        Scene scene = buttonLogin.getScene();
+        CustomScene scene = (CustomScene) buttonLogin.getScene();
         Window window = scene.getWindow();
         Stage stage = (Stage) window;
 
-        Scene scene2 = null;
+        CustomScene scene2 = null;
         try {
-            scene2 = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/ChatScene.fxml")));
+            scene2 = new CustomScene(FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/ChatScene.fxml")), scene.getMyClient());
         } catch (IOException e) {
             e.printStackTrace();
             //TODO Handle
