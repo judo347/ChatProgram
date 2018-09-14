@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class MyClient {
+public class MyClient extends Thread {
 
     private static final int PORT_NUMBER = 4444;
     private static final String HOST_NAME = "127.0.0.1";
@@ -47,25 +47,15 @@ public class MyClient {
 
         while (true){
 
-            incomming();
+            //incomming();
             outgoing();
+
+            System.out.println("MyClient: " + Thread.currentThread().getName()); //TODO TMEP
 
             System.out.println("Tick");
 
             //TODO Send incomming to window
         }
-
-        /*
-        try{
-            String userInput;
-            while ((userInput = stdIn.readLine()) != null) {
-                out.println(userInput);
-                System.out.println("echo: " + in.readLine());
-            }
-        } catch (IOException e){
-            System.out.println("Failure in: MyClient -> sendMessage.");
-            System.exit(1);
-        }*/
     }
 
     /** Takes a line from server and adds it to arraylist. */
@@ -73,7 +63,7 @@ public class MyClient {
 
         //TODO Should handle more than one line at a time.
         try {
-            if(stdIn.readLine() != null) //TODO Might not work
+            if(stdIn.readLine() != null) //TODO Might not work BUG BUG BUG
                 incommingMsg.add(in.readLine());
         } catch (IOException e) {
             e.printStackTrace();

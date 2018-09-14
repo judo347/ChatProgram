@@ -21,6 +21,9 @@ public class MainClient extends Application {
     public void start(Stage primaryStage) {
 
         myClient = new MyClient();
+        myClient.start();
+        //Thread thread = new Thread(myClient);
+        //thread.start();
 
         try{
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/LoginScene.fxml"));

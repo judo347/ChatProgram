@@ -47,6 +47,8 @@ public class LoginSceneController implements Initializable {
         Window window = scene.getWindow();
         Stage stage = (Stage) window;
 
+        System.out.println("LoginSceneController: " + Thread.currentThread().getName()); //TODO TMEP
+
         CustomScene scene2 = null;
         try {
             scene2 = new CustomScene(FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/ChatScene.fxml")), scene.getMyClient());
