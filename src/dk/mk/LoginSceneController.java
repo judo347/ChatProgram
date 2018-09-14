@@ -56,5 +56,6 @@ public class LoginSceneController implements Initializable {
         }
 
         stage.setScene(scene2);
+        scene.getMyClient().tick();
     }
 }

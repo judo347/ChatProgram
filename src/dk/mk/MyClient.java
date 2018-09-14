@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class MyClient {
 
@@ -15,6 +17,9 @@ public class MyClient {
     private PrintWriter out;
     private BufferedReader stdIn;
     private BufferedReader in;
+
+    private ArrayList<String> incommingMsg;
+    private ArrayList<String> outgoingMsg;
 
     public void MyClient(){
 
@@ -32,10 +37,25 @@ public class MyClient {
             System.err.println("Couldn't get I/O for the connection to " + HOST_NAME);
             System.exit(1);
         }
+
+        this.incommingMsg = new ArrayList<>();
+        this.outgoingMsg = new ArrayList<>();
     }
 
-    public void sendMessage(String msg){
+    /** Should check arraylist for elements to send, and save reveicved lines to other array*/
+    public void tick(){
 
+        while (true){
+
+            incomming();
+            outgoing();
+
+            System.out.println("Tick");
+
+            //TODO Send incomming to window
+        }
+
+        /*
         try{
             String userInput;
             while ((userInput = stdIn.readLine()) != null) {
@@ -45,6 +65,25 @@ public class MyClient {
         } catch (IOException e){
             System.out.println("Failure in: MyClient -> sendMessage.");
             System.exit(1);
+        }*/
+    }
+
+    /** Takes a line from server and adds it to arraylist. */
+    private void incomming(){
+
+        //TODO Should handle more than one line at a time.
+        try {
+            if(stdIn.readLine() != null) //TODO Might not work
+                incommingMsg.add(in.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+    }
+
+    /** Takes all lines in outgoing arraylist and sends them to server. */
+    private void outgoing(){
+        for(String string : outgoingMsg)
+            out.println(string);
     }
 }
