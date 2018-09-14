@@ -6,9 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MainClient extends Application {
+/**
+ * https://stackoverflow.com/questions/34863425/javafx-scene-builder-how-switch-scene
+ */
 
-    private MyClient client;
+public class MainClient extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -18,7 +20,7 @@ public class MainClient extends Application {
     public void start(Stage primaryStage) {
 
         try{
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/ChatScene.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("dk/mk/LoginScene.fxml"));
 
             primaryStage.setTitle("ChatProgram");
             primaryStage.setScene(new Scene(root));
@@ -28,9 +30,5 @@ public class MainClient extends Application {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-        client = new MyClient();
     }
-
-
 }
