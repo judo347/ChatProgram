@@ -21,14 +21,14 @@ public class MyClient {
     private ArrayList<String> incommingMsg;
     private ArrayList<String> outgoingMsg;
 
-    public void MyClient(){
+    public MyClient(){
 
         try{
 
             Socket echoSocket = new Socket(HOST_NAME, PORT_NUMBER);
-            PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+            this.out = new PrintWriter(echoSocket.getOutputStream(), true);
+            this.in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+            this.stdIn = new BufferedReader(new InputStreamReader(System.in));
 
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + HOST_NAME + HOST_NAME);
