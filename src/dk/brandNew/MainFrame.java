@@ -11,6 +11,7 @@ public class MainFrame {
 
         //Start server
         myClient = new MyClient();
+        myClient.start();
 
         //Display login screen /get login
         currentFrame = new LoginWindow(this);

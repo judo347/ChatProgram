@@ -46,12 +46,10 @@ public class MyClient extends Thread {
 
         while (true){
 
-            incomming();
+            //incomming(); //TODO Contains bug!
             outgoing();
 
-            System.out.println("MyClient: " + Thread.currentThread().getName()); //TODO TMEP
-
-            System.out.println("Tick");
+            System.out.println("Tick"); //TODO TMEP
 
             //TODO Send incomming to window
         }
@@ -72,13 +70,21 @@ public class MyClient extends Thread {
 
     /** Takes all lines in outgoing arraylist and sends them to server. */
     private void outgoing(){
-        for(String string : outgoingMsg)
-            out.println(string);
+        while(outgoingMsg.size() > 0){
+            out.println(outgoingMsg.get(0));
+            outgoingMsg.remove(0);
+        }
     }
 
     /** Takes a line from the program and adds it to the queue. */
     public void addLineToQueue(String string){
         //System.out.println(string);
         this.outgoingMsg.add(string);
+    }
+
+    @Override
+    public void run() {
+        System.out.println("New Thread started!");
+        this.tick();
     }
 }

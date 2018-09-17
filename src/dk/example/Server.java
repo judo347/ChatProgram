@@ -28,6 +28,8 @@ public class Server {
 
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
+                //System.out.println("SERVER WAS TRIGGERED!"); //TODO TEMP
+                System.out.println(inputLine); //TODO TEMP
                 out.println(inputLine);
             }
         } catch (IOException e) {
