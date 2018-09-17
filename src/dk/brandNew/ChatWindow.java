@@ -9,7 +9,14 @@ public class ChatWindow extends JFrame{
     private TextArea textArea;
     private JButton buttonSend;
 
-    public ChatWindow() {
+    private String userName;
+    private MainFrame mainFrame;
+
+    public ChatWindow(String userName, MainFrame mainFrame) {
+
+        this.mainFrame = mainFrame;
+        this.userName = userName;
+
         this.setName("Chat Program");
         this.setResizable(false);
 
@@ -49,10 +56,6 @@ public class ChatWindow extends JFrame{
         String msg = textFieldUserIn.getText();
         textFieldUserIn.setText("");
 
-        if(msg.equals("")){
-
-            //TODO Implement
-            System.out.println(msg);
-        }
+        if(!msg.equals("")){ mainFrame.sendMessage(msg); }
     }
 }

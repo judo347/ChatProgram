@@ -46,7 +46,7 @@ public class MyClient extends Thread {
 
         while (true){
 
-            //incomming();
+            incomming();
             outgoing();
 
             System.out.println("MyClient: " + Thread.currentThread().getName()); //TODO TMEP
@@ -74,5 +74,11 @@ public class MyClient extends Thread {
     private void outgoing(){
         for(String string : outgoingMsg)
             out.println(string);
+    }
+
+    /** Takes a line from the program and adds it to the queue. */
+    public void addLineToQueue(String string){
+        //System.out.println(string);
+        this.outgoingMsg.add(string);
     }
 }
