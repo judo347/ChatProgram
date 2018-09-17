@@ -6,7 +6,7 @@ import java.awt.*;
 public class ChatWindow extends JFrame{
 
     private TextField textFieldUserIn;
-    private TextArea textArea;
+    private TextArea textAreaLog;
     private JButton buttonSend;
 
     private String userName;
@@ -30,8 +30,8 @@ public class ChatWindow extends JFrame{
 
     private void addContentToPane(Container container){
 
-        textArea = new TextArea();
-        textArea.setEditable(false);
+        textAreaLog = new TextArea();
+        textAreaLog.setEditable(false);
         textFieldUserIn = new TextField("Message to send.");
         buttonSend = new JButton("SEND");
         buttonSend.addActionListener(e -> sendMessage());
@@ -44,7 +44,7 @@ public class ChatWindow extends JFrame{
 
         JPanel masterPanel = new JPanel();
         masterPanel.setLayout(new BoxLayout(masterPanel, BoxLayout.Y_AXIS));
-        masterPanel.add(textArea);
+        masterPanel.add(textAreaLog);
         masterPanel.add(buttomPanel);
 
         container.add(masterPanel);
@@ -56,6 +56,16 @@ public class ChatWindow extends JFrame{
         String msg = textFieldUserIn.getText();
         textFieldUserIn.setText("");
 
-        if(!msg.equals("")){ mainFrame.sendMessage(msg); }
+        //If field contains a msg
+        if(!msg.equals("")){
+            mainFrame.sendMessage(msg); //Send msg to server
+            textAreaLog.append(userName + ": " + msg + "\n"); //Print my msg in area
+        }
+    }
+
+    /** takes a msg and a sender and prints it to the log area. */
+    public void receiveMessage(String sender, String msg){
+
+        textAreaLog.append(sender + ": " + msg + "\n");
     }
 }

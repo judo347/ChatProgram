@@ -46,7 +46,7 @@ public class MyClient extends Thread {
 
         while (true){
 
-            //incomming(); //TODO Contains bug!
+            //incomming2(); //TODO Contains bug!
             outgoing();
 
             System.out.println("Tick"); //TODO TMEP
@@ -68,6 +68,21 @@ public class MyClient extends Thread {
 
     }
 
+    private void incomming2(){
+
+        try {
+            if(in.readLine() != null) //TODO Might not work BUG BUG BUG
+                incommingMsg.add(in.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //TODO TEMP
+        if(incommingMsg.size() > 0)
+            System.out.println("We got maiL!");
+
+    }
+
     /** Takes all lines in outgoing arraylist and sends them to server. */
     private void outgoing(){
         while(outgoingMsg.size() > 0){
@@ -78,7 +93,6 @@ public class MyClient extends Thread {
 
     /** Takes a line from the program and adds it to the queue. */
     public void addLineToQueue(String string){
-        //System.out.println(string);
         this.outgoingMsg.add(string);
     }
 
