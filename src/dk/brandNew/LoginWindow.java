@@ -9,7 +9,7 @@ public class LoginWindow extends JFrame{
     private JTextField textFieldLogin;
 
     public LoginWindow() {
-        JFrame frame = new JFrame("ChatProgram");
+        JFrame frame = new JFrame("Chat Program");
         frame.setResizable(false);
 
         addContentToPane(frame.getContentPane());
@@ -25,7 +25,7 @@ public class LoginWindow extends JFrame{
 
         //Button
         butLogin = new JButton("Login");
-        butLogin.addActionListener(e -> chanceToChatWindow());
+        butLogin.addActionListener(e -> changeToChatWindow());
 
         textFieldLogin = new JTextField("Username");
 
@@ -38,7 +38,7 @@ public class LoginWindow extends JFrame{
         container.add(masterPanel);
     }
 
-    private void chanceToChatWindow(){
+    private void changeToChatWindow(){
 
     }
 }
