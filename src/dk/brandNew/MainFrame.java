@@ -27,7 +27,8 @@ public class MainFrame {
 
         //If success = change window to ChatWindow
         if(userLogin) {
-            ((LoginWindow)currentFrame).closeThisWindow();
+            //((LoginWindow)currentFrame).closeThisWindow();
+            currentFrame.dispose();
 
             //Open/change to chatWindow
             currentFrame = new ChatWindow(userName, this);

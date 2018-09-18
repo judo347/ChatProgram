@@ -20,13 +20,12 @@ public class ChatWindow extends JFrame{
     private final int windowHeight = 600;
 
     public ChatWindow(String userName, MainFrame mainFrame) {
-        super();
+        super("Chat Program");
 
         this.mainFrame = mainFrame;
         this.userName = userName;
 
-        setName("Chat Program");
-        setResizable(false);
+
         addWindowListener(new WindowAdapter() { //Close server + window on EXIT window
             @Override
             public void windowClosing(WindowEvent e) {
@@ -40,9 +39,11 @@ public class ChatWindow extends JFrame{
         addContentToPane(this.getContentPane());
         pack();
 
+        //Set window properties
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(dim.width/2 - windowWidth/2, dim.height/2 - windowHeight/2);
         setSize(windowWidth, windowHeight);
+        setResizable(false);
         setVisible(true);
     }
 

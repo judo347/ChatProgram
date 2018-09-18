@@ -18,21 +18,20 @@ public class LoginWindow extends JFrame{
         super("Chat Program");
         this.mainFrame = mainFrame;
 
-        setResizable(false);
-
         addContentToPane(this.getContentPane());
         pack();
 
         //TODO close server if window is closed by X
 
+        //Set window properties
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(dim.width/2 - windowWidth/2, dim.height/2 - windowHeight/2);
         setSize(windowWidth, windowHeight);
+        setResizable(false);
         setVisible(true);
-
     }
 
-    /** Adds content to the window. Takes the frame as input. */
+    /** Adds content to the window. Takes the frame's container as input. */
     private void addContentToPane(Container container){
 
         //Button
@@ -40,10 +39,9 @@ public class LoginWindow extends JFrame{
         butLogin.addActionListener(e -> tryLogin());
 
         textFieldLogin = new JTextField("Username");
-        //Triggers when field is marked and enter is pressed
-        textFieldLogin.addActionListener(e -> tryLogin());
+        textFieldLogin.addActionListener(e -> tryLogin()); //Triggers when field is marked and enter is pressed
 
-        //Add the components
+        //Add the components to panel
         JPanel masterPanel = new JPanel();
         masterPanel.setLayout(new BoxLayout(masterPanel, BoxLayout.X_AXIS));
         masterPanel.add(textFieldLogin);
@@ -52,31 +50,13 @@ public class LoginWindow extends JFrame{
         container.add(masterPanel);
     }
 
+    /** Tries to login with whatever is in the textField (if !empty).
+     *  Done by sending the string to the mainFrame. */
     private void tryLogin(){
 
         String userName = textFieldLogin.getText();
         textFieldLogin.setText("");
 
         mainFrame.tryLogin(userName);
-    }
-
-    public void closeThisWindow(){
-
-        // this will make sure WindowListener.windowClosing() et al. will be called.
-        WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
-
-        // this will hide and dispose the frame, so that the application quits by
-        // itself if there is nothing else around.
-        setVisible(false);
-        dispose();
-        // if you have other similar frames around, you should dispose them, too.
-
-        // finally, call this to really exit.
-        // i/o libraries such as WiiRemoteJ need this.
-        // also, this is what swing does for JFrame.EXIT_ON_CLOSE
-        //System.exit(0);
-
-
     }
 }
