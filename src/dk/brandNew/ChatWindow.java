@@ -16,6 +16,9 @@ public class ChatWindow extends JFrame{
     private String userName;
     private MainFrame mainFrame;
 
+    private final int windowWidth = 400;
+    private final int windowHeight = 600;
+
     public ChatWindow(String userName, MainFrame mainFrame) {
         super();
 
@@ -35,9 +38,11 @@ public class ChatWindow extends JFrame{
 
         //Add content
         addContentToPane(this.getContentPane());
-
         pack();
-        setSize(400, 600);
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/2 - windowWidth/2, dim.height/2 - windowHeight/2);
+        setSize(windowWidth, windowHeight);
         setVisible(true);
     }
 
@@ -46,12 +51,8 @@ public class ChatWindow extends JFrame{
         textAreaLog = new TextArea();
         textAreaLog.setEditable(false);
         textFieldUserIn = new TextField("Message to send.");
-        textFieldUserIn.addActionListener(new ActionListener() { //Triggers when field is marked and enter is pressed
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sendMessage();
-            }
-        });
+        //Triggers when field is marked and enter is pressed
+        textFieldUserIn.addActionListener(e -> sendMessage());
         buttonSend = new JButton("SEND");
         buttonSend.addActionListener(e -> sendMessage());
 

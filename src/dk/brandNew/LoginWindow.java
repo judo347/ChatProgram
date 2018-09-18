@@ -2,8 +2,6 @@ package dk.brandNew;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 public class LoginWindow extends JFrame{
@@ -13,6 +11,9 @@ public class LoginWindow extends JFrame{
 
     private MainFrame mainFrame;
 
+    private final int windowWidth = 200;
+    private final int windowHeight = 100;
+
     public LoginWindow(MainFrame mainFrame) {
         super("Chat Program");
         this.mainFrame = mainFrame;
@@ -20,9 +21,13 @@ public class LoginWindow extends JFrame{
         setResizable(false);
 
         addContentToPane(this.getContentPane());
-
         pack();
-        setSize(200, 100);
+
+        //TODO close server if window is closed by X
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/2 - windowWidth/2, dim.height/2 - windowHeight/2);
+        setSize(windowWidth, windowHeight);
         setVisible(true);
 
     }
@@ -35,12 +40,8 @@ public class LoginWindow extends JFrame{
         butLogin.addActionListener(e -> tryLogin());
 
         textFieldLogin = new JTextField("Username");
-        textFieldLogin.addActionListener(new ActionListener() { //Triggers when field is marked and enter is pressed
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tryLogin();
-            }
-        });
+        //Triggers when field is marked and enter is pressed
+        textFieldLogin.addActionListener(e -> tryLogin());
 
         //Add the components
         JPanel masterPanel = new JPanel();

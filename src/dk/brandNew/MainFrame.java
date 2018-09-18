@@ -13,7 +13,7 @@ public class MainFrame {
         myClient = new MyClient();
         myClient.start();
 
-        //Display login screen /get login
+        //Display login screen / get login
         currentFrame = new LoginWindow(this);
     }
 
@@ -27,14 +27,9 @@ public class MainFrame {
 
         //If success = change window to ChatWindow
         if(userLogin) {
-            //currentFrame.setVisible(false); //TODO should close the FRAME instead!!
-            //currentFrame.dispatchEvent(new WindowEvent(currentFrame, WindowEvent.WINDOW_CLOSING));
-            ((LoginWindow)currentFrame).closeThisWindow(); //TODO THIS SHOULD BE THE RIGHT ONE
-            //currentFrame.dispose();
-            //currentFrame.setVisible(false);
-            //currentFrame.setSize(800, 800);
+            ((LoginWindow)currentFrame).closeThisWindow();
 
-            currentFrame = null;
+            //Open/change to chatWindow
             currentFrame = new ChatWindow(userName, this);
         }
 
