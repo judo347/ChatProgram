@@ -29,8 +29,12 @@ public class MainFrame {
         if(userLogin) {
             //currentFrame.setVisible(false); //TODO should close the FRAME instead!!
             //currentFrame.dispatchEvent(new WindowEvent(currentFrame, WindowEvent.WINDOW_CLOSING));
-            ((LoginWindow)currentFrame).closeThisWindow();
+            ((LoginWindow)currentFrame).closeThisWindow(); //TODO THIS SHOULD BE THE RIGHT ONE
+            //currentFrame.dispose();
+            //currentFrame.setVisible(false);
+            //currentFrame.setSize(800, 800);
 
+            currentFrame = null;
             currentFrame = new ChatWindow(userName, this);
         }
 
@@ -40,5 +44,12 @@ public class MainFrame {
     /** Takes a string from the window and forwards it to the MyClient. */
     public void sendMessage(String string){
         myClient.addLineToQueue(string);
+    }
+
+    /** Terminates the server and current window. */
+    public void terminateAll(){
+        if(currentFrame != null)
+            currentFrame.dispose();
+        myClient.terminateServer();
     }
 }

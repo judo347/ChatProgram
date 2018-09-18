@@ -2,6 +2,10 @@ package dk.brandNew;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ChatWindow extends JFrame{
 
@@ -13,19 +17,28 @@ public class ChatWindow extends JFrame{
     private MainFrame mainFrame;
 
     public ChatWindow(String userName, MainFrame mainFrame) {
+        super();
 
         this.mainFrame = mainFrame;
         this.userName = userName;
 
-        this.setName("Chat Program");
-        this.setResizable(false);
+        setName("Chat Program");
+        setResizable(false);
+        addWindowListener(new WindowAdapter() { //Close server + window on EXIT window
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+
+                mainFrame.terminateAll();
+            }
+        });
 
         //Add content
         addContentToPane(this.getContentPane());
 
-        this.pack();
-        this.setSize(400, 600);
-        this.setVisible(true);
+        pack();
+        setSize(400, 600);
+        setVisible(true);
     }
 
     private void addContentToPane(Container container){
@@ -33,6 +46,12 @@ public class ChatWindow extends JFrame{
         textAreaLog = new TextArea();
         textAreaLog.setEditable(false);
         textFieldUserIn = new TextField("Message to send.");
+        textFieldUserIn.addActionListener(new ActionListener() { //Triggers when field is marked and enter is pressed
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sendMessage();
+            }
+        });
         buttonSend = new JButton("SEND");
         buttonSend.addActionListener(e -> sendMessage());
 

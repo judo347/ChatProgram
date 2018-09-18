@@ -20,7 +20,11 @@ public class MyClient extends Thread {
     private ArrayList<String> incommingMsg;
     private ArrayList<String> outgoingMsg;
 
+    private boolean isAlive;
+
     public MyClient(){
+
+        this.isAlive = true;
 
         try{
 
@@ -44,7 +48,7 @@ public class MyClient extends Thread {
     /** Should check arraylist for elements to send, and save reveicved lines to other array*/
     public void tick(){
 
-        while (true){
+        while (isAlive){
 
             //incomming2(); //TODO Contains bug!
             outgoing();
@@ -100,5 +104,9 @@ public class MyClient extends Thread {
     public void run() {
         System.out.println("New Thread started!");
         this.tick();
+    }
+
+    public void terminateServer(){
+        this.isAlive = false;
     }
 }

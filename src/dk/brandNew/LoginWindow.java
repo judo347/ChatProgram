@@ -2,6 +2,8 @@ package dk.brandNew;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 public class LoginWindow extends JFrame{
@@ -12,17 +14,16 @@ public class LoginWindow extends JFrame{
     private MainFrame mainFrame;
 
     public LoginWindow(MainFrame mainFrame) {
-
+        super("Chat Program");
         this.mainFrame = mainFrame;
 
-        JFrame frame = new JFrame("Chat Program");
-        frame.setResizable(false);
+        setResizable(false);
 
-        addContentToPane(frame.getContentPane());
+        addContentToPane(this.getContentPane());
 
-        frame.pack();
-        frame.setSize(200, 100);
-        frame.setVisible(true);
+        pack();
+        setSize(200, 100);
+        setVisible(true);
 
     }
 
@@ -34,6 +35,12 @@ public class LoginWindow extends JFrame{
         butLogin.addActionListener(e -> tryLogin());
 
         textFieldLogin = new JTextField("Username");
+        textFieldLogin.addActionListener(new ActionListener() { //Triggers when field is marked and enter is pressed
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tryLogin();
+            }
+        });
 
         //Add the components
         JPanel masterPanel = new JPanel();
