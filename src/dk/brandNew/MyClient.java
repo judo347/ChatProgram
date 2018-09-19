@@ -17,7 +17,7 @@ public class MyClient extends Thread {
     private BufferedReader stdIn;
     private BufferedReader in;
 
-    private ArrayList<String> incommingMsg;
+    private ArrayList<String> incomingMsg;
     private ArrayList<String> outgoingMsg;
 
     private boolean isAlive;
@@ -27,7 +27,6 @@ public class MyClient extends Thread {
         this.isAlive = true;
 
         try{
-
             Socket echoSocket = new Socket(HOST_NAME, PORT_NUMBER);
             this.out = new PrintWriter(echoSocket.getOutputStream(), true);
             this.in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
@@ -41,7 +40,7 @@ public class MyClient extends Thread {
             System.exit(1);
         }
 
-        this.incommingMsg = new ArrayList<>();
+        this.incomingMsg = new ArrayList<>();
         this.outgoingMsg = new ArrayList<>();
     }
 
@@ -50,6 +49,7 @@ public class MyClient extends Thread {
 
         while (isAlive){
 
+            //incomming();
             //incomming2(); //TODO Contains bug!
             outgoing();
 
@@ -65,7 +65,7 @@ public class MyClient extends Thread {
         //TODO Should handle more than one line at a time.
         try {
             if(stdIn.readLine() != null) //TODO Might not work BUG BUG BUG
-                incommingMsg.add(in.readLine());
+                incomingMsg.add(in.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,13 +76,13 @@ public class MyClient extends Thread {
 
         try {
             if(in.readLine() != null) //TODO Might not work BUG BUG BUG
-                incommingMsg.add(in.readLine());
+                incomingMsg.add(in.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         //TODO TEMP
-        if(incommingMsg.size() > 0)
+        if(incomingMsg.size() > 0)
             System.out.println("We got maiL!");
 
     }
@@ -106,6 +106,7 @@ public class MyClient extends Thread {
         this.tick();
     }
 
+    /** Terminates the MyClient server contact look. */
     public void terminateServer(){
         this.isAlive = false;
     }

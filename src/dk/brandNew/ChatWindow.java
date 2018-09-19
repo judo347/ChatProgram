@@ -2,8 +2,6 @@ package dk.brandNew;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -25,8 +23,8 @@ public class ChatWindow extends JFrame{
         this.mainFrame = mainFrame;
         this.userName = userName;
 
-
-        addWindowListener(new WindowAdapter() { //Close server + window on EXIT window
+        //Close server + window on EXIT window
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
@@ -47,26 +45,26 @@ public class ChatWindow extends JFrame{
         setVisible(true);
     }
 
+    /** Adds content to the window. Takes the frame's container as input. */
     private void addContentToPane(Container container){
 
         textAreaLog = new TextArea();
         textAreaLog.setEditable(false);
         textFieldUserIn = new TextField("Message to send.");
-        //Triggers when field is marked and enter is pressed
-        textFieldUserIn.addActionListener(e -> sendMessage());
+        textFieldUserIn.addActionListener(e -> sendMessage()); //Triggers when field is marked and enter is pressed
         buttonSend = new JButton("SEND");
         buttonSend.addActionListener(e -> sendMessage());
 
         //
-        JPanel buttomPanel = new JPanel();
-        buttomPanel.setLayout(new BoxLayout(buttomPanel, BoxLayout.X_AXIS));
-        buttomPanel.add(textFieldUserIn);
-        buttomPanel.add(buttonSend);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+        bottomPanel.add(textFieldUserIn);
+        bottomPanel.add(buttonSend);
 
         JPanel masterPanel = new JPanel();
         masterPanel.setLayout(new BoxLayout(masterPanel, BoxLayout.Y_AXIS));
         masterPanel.add(textAreaLog);
-        masterPanel.add(buttomPanel);
+        masterPanel.add(bottomPanel);
 
         container.add(masterPanel);
     }

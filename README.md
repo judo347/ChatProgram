@@ -8,7 +8,3 @@
     - All functionality included in that
 - LoginWindow
     - Should validate username before login
-    
-Cleanup todo:
-    - MyClient
-    - ChatWindow
